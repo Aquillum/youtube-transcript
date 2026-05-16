@@ -70,6 +70,10 @@ youtube_transcript_app/
 
 5. Open `http://localhost:5000` in your browser
 
+## 🐳 Docker
+A Docker setup is included at the repo root (`Dockerfile` and `docker-compose.yaml`).
+For the full Docker instructions, see `README-DOCKER.md`; for a shorter version, see `README-DOCKER-SHORT.md`.
+
 ## 💡 Use Cases
 - Content creators needing video transcripts
 - Students accessing lecture transcripts
