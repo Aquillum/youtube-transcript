@@ -6,8 +6,8 @@ This file documents the local Docker build and start flow for the project, with 
 
 - Builds the Flask app into a Docker image
 - Exposes the web app on port `5000`
-- Stores exported transcript text files on the host in `./data/transcripts`
-- Uses `gunicorn` inside the container instead of Flask's development server
+- Stores exported transcript text files on the host in `./data/transcoded`
+- Uses `gunicorn` inside the container with a longer timeout for slower Pi requests
 
 ## Project structure
 
@@ -17,7 +17,7 @@ This file documents the local Docker build and start flow for the project, with 
 ├── docker-compose.yaml
 ├── README-DOCKER.md
 ├── data/
-│   └── transcripts/
+│   └── transcoded/
 └── youtube_transcript_app/
     ├── app.py
     ├── requirements.txt
@@ -96,7 +96,7 @@ Transcript files are written inside the container to:
 and mounted to the host path:
 
 ```text
-./data/transcripts
+./data/transcoded
 ```
 
 So the generated transcript text files will remain on the Raspberry Pi even after the container stops.
@@ -117,7 +117,7 @@ So the generated transcript text files will remain on the Raspberry Pi even afte
 
 ## Troubleshooting
 
-- If the transcript files are not showing up on the host, check that `./data/transcripts` exists and that the container has write permissions.
+- If the transcript files are not showing up on the host, check that `./data/transcoded` exists and that the container has write permissions.
 - If the app does not start, inspect logs with `docker compose logs -f`.
 - If port `5000` is already in use, change the left side of the ports mapping in `docker-compose.yaml`.
 - If you move the project into another folder, keep the `docker compose` commands tied to that folder so the relative volume path still resolves correctly.

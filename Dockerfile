@@ -1,7 +1,8 @@
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    GUNICORN_CMD_ARGS="--bind 0.0.0.0:5000 --workers 1 --threads 4 --timeout 180 --access-logfile -"
 
 WORKDIR /app
 
@@ -13,4 +14,4 @@ WORKDIR /app/youtube_transcript_app
 
 EXPOSE 5000
 
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+CMD ["gunicorn", "app:app"]

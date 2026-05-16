@@ -41,7 +41,7 @@ http://localhost:5000
 ## Important paths
 
 - App inside container: `/internal`
-- Host transcript folder: `./data/transcripts`
+- Host transcript folder: `./data/transcoded`
 
 ## Project structure
 
@@ -51,7 +51,7 @@ http://localhost:5000
 ├── docker-compose.yaml
 ├── README-DOCKER-SHORT.md
 ├── data/
-│   └── transcripts/
+│   └── transcoded/
 └── youtube_transcript_app/
     ├── app.py
     ├── requirements.txt
