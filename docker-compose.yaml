@@ -1,0 +1,14 @@
+services:
+  youtube-transcript-extractor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data/transcripts:/internal
+    environment:
+      PORT: "5000"
+      FLASK_DEBUG: "0"
+      TRANSCRIPT_OUTPUT_DIR: /internal
+    restart: unless-stopped

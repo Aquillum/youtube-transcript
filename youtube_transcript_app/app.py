@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 from youtube_transcript_api import YouTubeTranscriptApi
+from pathlib import Path
+import os
 import re
 
 app = Flask(__name__)
+INTERNAL_DIR = Path(os.getenv('TRANSCRIPT_OUTPUT_DIR', '/internal'))
 
 def extract_video_id(url):
     # Extract video ID from various YouTube URL formats
@@ -41,14 +44,22 @@ def get_transcript():
         formatted_transcript = ''
         for entry in transcript_list:
             formatted_transcript += f"{entry['text']} "
+
+        transcript_text = formatted_transcript.strip()
+
+        # Save a copy inside the mounted volume so the host gets the text file too.
+        INTERNAL_DIR.mkdir(parents=True, exist_ok=True)
+        output_file = INTERNAL_DIR / f"youtube-transcript-{video_id}.txt"
+        output_file.write_text(transcript_text, encoding='utf-8')
         
         return jsonify({
             'success': True,
-            'transcript': formatted_transcript.strip()
+            'transcript': transcript_text,
+            'saved_to': str(output_file)
         })
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(host='0.0.0.0', port=int(os.getenv('PORT', '5000')), debug=os.getenv('FLASK_DEBUG', '0') == '1') 
