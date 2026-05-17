@@ -42,6 +42,7 @@ http://localhost:5000
 
 - App inside container: `/internal`
 - Host transcript folder: `./data/transcoded`
+- Optional cookies file: mount it into the container and set `YOUTUBE_COOKIES_FILE`
 
 ## Project structure
 

@@ -6,9 +6,13 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./data/transcripts:/internal
+      - ./data/transcoded:/internal
+      # Optional: export cookies from a logged-in browser and mount them read-only.
+      # - ./data/cookies.txt:/tmp/youtube-cookies.txt:ro
     environment:
       PORT: "5000"
       FLASK_DEBUG: "0"
       TRANSCRIPT_OUTPUT_DIR: /internal
+      # Optional: point this at the mounted cookies file.
+      # YOUTUBE_COOKIES_FILE: /tmp/youtube-cookies.txt
     restart: unless-stopped

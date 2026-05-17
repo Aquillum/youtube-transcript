@@ -8,6 +8,8 @@ This file documents the local Docker build and start flow for the project, with 
 - Exposes the web app on port `5000`
 - Stores exported transcript text files on the host in `./data/transcoded`
 - Uses `gunicorn` inside the container with a longer timeout for slower Pi requests
+- Can fall back to `yt-dlp` if the public transcript endpoint fails
+- Some videos may need a cookies file mounted into the container and referenced via `YOUTUBE_COOKIES_FILE`
 
 ## Project structure
 

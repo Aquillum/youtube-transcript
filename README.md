@@ -73,6 +73,7 @@ youtube_transcript_app/
 ## 🐳 Docker
 A Docker setup is included at the repo root (`Dockerfile` and `docker-compose.yaml`).
 For the full Docker instructions, see `README-DOCKER.md`; for a shorter version, see `README-DOCKER-SHORT.md`.
+Some YouTube videos may now need a cookies file because YouTube blocks automated requests from some servers. If that happens, set `YOUTUBE_COOKIES_FILE` to a browser-exported cookies file mounted into the container.
 
 ## 💡 Use Cases
 - Content creators needing video transcripts
